@@ -1,0 +1,55 @@
+==================================================websites===========================================
+https://dzone.com/articles/top-20-git-commands-with-examples
+
+===================================================================================================
+
+1) how to add and commit with single command
+
+         [      git commit -a -m 'commit message here'     ]
+===================================================================================================
+2) how git reset commands works
+
+      I )  git reset --hard HEAD~n / git reset  --hard <commit hash id>
+              - it can reset(delete|remove) working directory , staging area and commit.
+              - it will not remove untracked file
+
+      II )  git reset  --soft HEAD-n / git reset  --soft <commit hash id>
+               - whatever changes were in commit will be back to staging area
+               - it will not remove any previous chnages from staging and working area
+===================================================================================================
+3) what is git amend command and how it works
+      website => [  https://www.atlassian.com/git/tutorials/rewriting-history#:~:text=The%20git%20commit%20%2D%2Damend,message%20without%20changing%20its%20snapshot.  ]
+
+       I )  [  git commit --amend -m "an updated commit message"  ]
+                  - this command will update the message of the last commit 
+
+       II )  if you want to edit last commit and add some more changes that you did in code then use this command
+                 [  git commit --amend --no-edit  ]
+                          - but first add changes to staging area like a normal git commiting process
+                          -  (  --no-edit ) 
+                                  - it is used to not change the message of commit , means same last message will be continued with this updated commit
+
+===================================================================================================
+4) how to get back in time of branch commit history
+          [   git checkout <commit hash ID>  ]
+               - it will make your HEAD  diattached from latest commit
+               - to go back to current commit 
+                       [  git checkout <branch name>  ]
+
+===================================================================================================
+5) git basic commands 
+        1 ) git add    2)  git mv    3)   git commit     4 )   git restore     5 )   git rm   6)   git bisect    7)    git diff     8)  git grep   9) git log
+        10 )  git show    11)   git status   12)   git branch   13)   git commit   14)    git merge   15)   git rebase   16)   git reset   17)   git switch 
+        18)  git tag   19)   git fetch    20)   git pull    21)   git  push   22)  git checkout
+
+===================================================================================================
+6) how to create and switch to new branch
+
+     git checkout -b feature
+           - it will create new branch and switch to it
+
+===================================================================================================
+7) how to set up upstream branch in git
+
+   https://www.geeksforgeeks.org/how-to-set-upstream-branch-on-git/#:~:text=Set%20Upstream%20Branch%20using%20Git%20Push%20command&text=When%20the%20current%20branch%20i.e,command%20with%20the%20%2Du%20option.
+
