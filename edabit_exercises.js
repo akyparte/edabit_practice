@@ -132,7 +132,57 @@ function threeSum(arr) {
     }
 }
 
-console.log(threeSum([0, -1, 1, 0, -1, 1]));
+// console.log(threeSum([0, -1, 1, 0, -1, 1]));
 
 
 '[[0, -1, 1], [0, 1, -1], [-1, 1, 0], [-1, 0, 1], [1, 0, -1]]'
+
+
+
+
+function fiscalCode(person) {
+    let resultStr = '';
+    if(person.surname){
+        let surname = person.surname;
+        let consonantCount = 0;
+        let con_arr = [];
+        let vo_arr = [];
+
+        for(let i = 0;i < surname.length;i++){
+        
+
+            if(!isVovel(surname[i])){
+                 con_arr.push(surname[i]);
+                 consonantCount++;
+            }else {
+                vo_arr.push(surname[i]);
+            }
+
+            if(consonantCount === 3){
+                resultStr = con_arr.join('');
+                break;
+            }
+
+            if(i == surname.length-1){
+                resultStr = `${con_arr.join('')}${vo_arr.join('').substring(0,(3-con_arr.length))}`
+            }
+
+
+        }
+
+        console.log(resultStr.toUpperCase());
+    }
+    if()
+}
+
+
+function isVovel(character) {
+    if(character === 'a' || character === 'e' || character === 'i' || character === 'o' || character === 'u'){
+        return true;
+    }else {
+        return false;
+    }
+}
+
+
+fiscalCode({ surname:'Hope'});
