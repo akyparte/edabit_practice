@@ -137,7 +137,8 @@ function threeSum(arr) {
 
 '[[0, -1, 1], [0, 1, -1], [-1, 1, 0], [-1, 0, 1], [1, 0, -1]]'
 
-
+const months = { 1: "A", 2: "B", 3: "C", 4: "D", 5: "E", 6: "H",
+7: "L", 8: "M", 9: "P", 10: "R", 11: "S", 12: "T" }
 
 
 function fiscalCode(person) {
@@ -165,18 +166,70 @@ function fiscalCode(person) {
 
             if(i == surname.length-1){
                 resultStr = `${con_arr.join('')}${vo_arr.join('').substring(0,(3-con_arr.length))}`
-            }
 
+                if(resultStr.length < 3){
+                    resultStr = resultStr + 'X';
+                }
+            }
 
         }
 
-        console.log(resultStr.toUpperCase());
+
+        
     }
-    if()
+    if(person.name){
+        let name = person.name;
+        let consonantCharacters = [];
+        let vovelCharacters = [];
+
+        for(let i = 0;i < name.length;i++){
+           if(!isVovel(name[i])){
+              consonantCharacters.push(name[i]); 
+           }else {
+              vovelCharacters.push(name[i]);
+           }
+           if((consonantCharacters.length === 3) && (i === name.length-1)){
+            resultStr = resultStr + consonantCharacters.join('').substring(0,3);
+            break;
+           }
+
+           if(i === name.length-1 && consonantCharacters.length >= 3){
+              resultStr = resultStr + consonantCharacters[0] + consonantCharacters[1] + consonantCharacters[2];
+              break;
+           }
+           if(i === name.length-1 && consonantCharacters.length < 3){
+               resultStr = resultStr + consonantCharacters.join('') + vovelCharacters.join('').substring(0,3 - consonantCharacters.length);
+               if(resultStr.length < 3){
+                resultStr = resultStr + 'X';
+               }
+               break;
+           }
+        }
+    }
+
+    // console.log(resultStr);
+    if(person.dob && person.gender){
+         let dobArr = person.dob.split('/'); 
+        resultStr = resultStr + dobArr[2].substring(2);
+        resultStr = resultStr + months[dobArr[1]];
+        if(person.gender && person.gender === 'M'){
+              if(dobArr[0].length === 1){
+                resultStr = resultStr + `0${dobArr[0]}`;
+              }else {
+                resultStr = resultStr + dobArr[0];
+              }
+        }else if(person.gender && person.gender === 'F'){
+            resultStr = resultStr + (Number(dobArr[0]) + 40); 
+        }
+    }
+
+
+    console.log(resultStr.toUpperCase());
 }
 
 
 function isVovel(character) {
+    character = character.toLowerCase();
     if(character === 'a' || character === 'e' || character === 'i' || character === 'o' || character === 'u'){
         return true;
     }else {
@@ -185,4 +238,9 @@ function isVovel(character) {
 }
 
 
-fiscalCode({ surname:'Hope'});
+fiscalCode({
+    name: "Mickey",
+    surname: "Mouse",
+    gender: "M",
+    dob: "16/1/1928"
+  })
