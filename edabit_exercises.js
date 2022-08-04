@@ -141,6 +141,16 @@ const months = { 1: "A", 2: "B", 3: "C", 4: "D", 5: "E", 6: "H",
 7: "L", 8: "M", 9: "P", 10: "R", 11: "S", 12: "T" }
 
 
+
+function findVovelAndConsonant(str,con_arr,vo_arr) {
+    for(let i = 0;i < str.length;i++){
+        if(!isVovel(str[i])){
+             con_arr.push(str[i]);
+        }else {
+            vo_arr.push(str[i]);
+        }
+    } 
+}
 function fiscalCode(person) {
     let resultStr = '';
     if(person.surname){
@@ -149,30 +159,47 @@ function fiscalCode(person) {
         let con_arr = [];
         let vo_arr = [];
 
-        for(let i = 0;i < surname.length;i++){
+        // for(let i = 0;i < surname.length;i++){
         
 
-            if(!isVovel(surname[i])){
-                 con_arr.push(surname[i]);
-                 consonantCount++;
-            }else {
-                vo_arr.push(surname[i]);
-            }
+        //     if(!isVovel(surname[i])){
+        //          con_arr.push(surname[i]);
+        //          consonantCount++;
+        //     }else {
+        //         vo_arr.push(surname[i]);
+        //     }
 
-            if(consonantCount === 3){
-                resultStr = con_arr.join('');
-                break;
-            }
+        //     if(consonantCount === 3){
+        //         resultStr = con_arr.join('');
+        //         break;
+        //     }
 
-            if(i == surname.length-1){
-                resultStr = `${con_arr.join('')}${vo_arr.join('').substring(0,(3-con_arr.length))}`
+        //     if(i == surname.length-1){
+        //         resultStr = `${con_arr.join('')}${vo_arr.join('').substring(0,(3-con_arr.length))}`
 
-                if(resultStr.length < 3){
-                    resultStr = resultStr + 'X';
-                }
-            }
+        //         if(resultStr.length < 3){
+        //             resultStr = resultStr + 'X';
+        //         }
+        //     }
 
+        // }
+        
+        findVovelAndConsonant(surname,con_arr,vo_arr);
+
+        if(con_arr.length === 3){
+            resultStr = con_arr.join('');
         }
+        if(con_arr.length >= 3){
+            resultStr = con_arr.join('');
+        }else {
+            resultStr = `${con_arr.join('')}${vo_arr.join('').substring(0,(3-con_arr.length))}`
+            if(resultStr.length < 3){
+                resultStr = resultStr + 'X';
+            } 
+        }
+        
+
+        
 
 
         
@@ -202,9 +229,23 @@ function fiscalCode(person) {
                if(resultStr.length < 3){
                 resultStr = resultStr + 'X';
                }
-               break;
            }
         }
+
+        findVovelAndConsonant(surname,consonantCharacters,vovelCharacters);
+        if((consonantCharacters.length === 3)){
+            resultStr = resultStr + consonantCharacters.join('').substring(0,3);
+        }
+        if(consonantCharacters.length >= 3){
+            resultStr = resultStr + consonantCharacters[0] + consonantCharacters[1] + consonantCharacters[2];
+         }
+         if(consonantCharacters.length < 3){
+             resultStr = resultStr + consonantCharacters.join('') + vovelCharacters.join('').substring(0,3 - consonantCharacters.length);
+             if(resultStr.length < 3){
+              resultStr = resultStr + 'X';
+             }
+         }
+
     }
 
     // console.log(resultStr);
